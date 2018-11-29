@@ -3,7 +3,7 @@
 class DiniSurface : public ParamSurface {
 private:
 	const float a = 1;
-	const float b = 0.2;
+	const float b = 0.15;
 
 public:
 	DiniSurface() {
@@ -32,14 +32,15 @@ public:
 		return cross(drdu, drdv);
 	}
 
-  VertexData GenVertexData(float u, float v) {
-    VertexData vd;
-		vd.position = r(u, v);
-		vd.normal = dr(u, v);
+	VertexData GenVertexData(float u, float v) {
+		VertexData vd;
+		float U = u* 4*M_PI;     // u \in [0, 4PI]
+		float V = (v+0.01 ) *1;              // v \in [0.01, 1]
+		vd.position = r(U, V);
+		vd.normal = dr(U, V);
 		vd.texcoord = vec2(u, v);
 		return vd;
-  }
-
+	}
 };
 
 ```
